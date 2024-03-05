@@ -11,11 +11,14 @@ using namespace sf;
 
 class Demineur {
 	private:
-		vector<RectangleShape> squares;
+		vector<RectangleShape> _squares;
 
 	public:
 		Demineur();
 		~Demineur();
+
+		vector<RectangleShape> &getSquares();
+		void setSquareColor(RectangleShape &square);
 };
 
 #endif

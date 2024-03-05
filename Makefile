@@ -14,7 +14,7 @@ RED = \033[0;31m
 NO_COL = \033[0m
 
 all:
-	@$(CC) main.cpp $(INCLUDE_PATH) -o $(NAME) $(LIB_PATH) $(CFLAGS)
+	@$(CC) main.cpp Demineur.cpp $(INCLUDE_PATH) -o $(NAME) $(LIB_PATH) $(CFLAGS)
 	@echo "$(YELLOW)Compiling: $(BLUE)$(NAME)$(NO_COL)"
 clean:
 	@$(RM) $(NAME)

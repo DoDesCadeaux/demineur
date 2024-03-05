@@ -27,9 +27,9 @@ void printSquaresPositions(const vector<Vector2f> &squaresPositions) {
 int main() {
 	RenderWindow window(VideoMode(320, 320), "Demineur");
 	vector<Vector2f> squaresPositions = getSquaresPositions();
-	vector<RectangleShape> squares;
+	Demineur demineur;
 
-	printSquaresPositions(squaresPositions);
+//	printSquaresPositions(squaresPositions);
 	
 	while (window.isOpen()) { //Main Loop
 		Event event;
@@ -41,40 +41,25 @@ int main() {
 
 		window.clear(Color::Black);
 
-
-		for (size_t i = 0; i < 10; i++) {
-			for (size_t j = 0; j < 10; j++) {
-				RectangleShape square(Vector2f(32.0f, 32.0f));
-
-				square.setFillColor(Color(117, 114, 114));
-				square.setOutlineThickness(1.0f);
-				square.setOutlineColor(Color::Red);
-
-				square.setPosition(j * 32, i * 32);
-				squares.push_back(square);
-				window.draw(square);
-			}
-		}
-
 		while (window.pollEvent(event)) {
 			if (event.type == Event::Closed)
 				window.close();
 			else if (event.type == Event::MouseButtonPressed) {
 				if (event.mouseButton.button == Mouse::Left) {
 					Vector2i mouseLocalPosition = Mouse::getPosition(window);
-					for (auto &square : squares) {
+					for (auto &square : demineur.getSquares()) {
 						if (square.getGlobalBounds().contains(mouseLocalPosition.x, mouseLocalPosition.y))
-							square.setFillColor(Color::Green);
+							demineur.setSquareColor(square);
 					}
 				}
 			}
 		}
-		for (const RectangleShape &square : squares)
+
+		for (const RectangleShape &square : demineur.getSquares())
 			window.draw(square);
 
 		window.display();
 	}
-
 
 	return 0;
 }
