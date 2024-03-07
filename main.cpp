@@ -5,10 +5,15 @@ int main() {
 	Demineur demineur;
 	srand (time(NULL));
 
+	Texture mine;
+	if (!mine.loadFromFile("mine.png"))
+		return -1;
+
 	while (window.isOpen()) { //Main Loop
 		Event event;
 
 		if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Escape)) {
+			system("leaks demineur");
 			cout << "Fermeture" << endl;
 			window.close();
 		}
@@ -22,15 +27,14 @@ int main() {
 					Vector2i mouseLocalPosition = Mouse::getPosition(window);
 
 					for (auto &square : demineur.getSquares()) {
-						if (demineur.getGameStart()) {
+						if (demineur.getGameStart()) 
 							square.setRandSquareType(true);
-						}
 						else
 							square.setRandSquareType(false);
 						if (square.getGlobalBounds().contains(mouseLocalPosition.x, mouseLocalPosition.y) && !square.isDiscovered()) {
 							square.setDiscovered();
 							if (square.getSquareType() == -1)
-								demineur.setSquareColor(square, Color::Red);
+								demineur.setSquareTexture(square, &mine);
 							else
 								demineur.setSquareColor(square, Color::Green);
 							demineur.setGameStart(false);
@@ -45,7 +49,6 @@ int main() {
 
 		window.display();
 	}
-
 	return 0;
 }
 

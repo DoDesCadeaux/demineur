@@ -25,6 +25,10 @@ void Demineur::setSquareColor(Square &square,const Color &color) {
 	square.setFillColor(color);
 }
 
+void Demineur::setSquareTexture(Square &square, const Texture *texture) {
+	square.setTexture(texture);
+}
+
 bool &Demineur::getGameStart() {
 	return this->_isGameStart;
 }

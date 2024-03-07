@@ -26,6 +26,7 @@ class Demineur {
 		bool &getGameStart(); 
 		const int &getBombs() const;
 		void setSquareColor(Square &square, const Color &color);
+		void setSquareTexture(Square &square, const Texture *texture);
 		void setBombs(int bombs);
 		void setGameStart(bool start);
 		void printSquaresPositions(const vector<Vector2f> &squaresPositions);
