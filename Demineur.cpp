@@ -1,6 +1,6 @@
 #include "Demineur.hpp"
 
-Demineur::Demineur() : _bombs(0) {
+Demineur::Demineur() : _bombs(0), _isGameStart(true) {
 	for (size_t i = 0; i < 10; i++) {
 		for (size_t j = 0; j < 10; j++) {
 			Square square(Vector2f(32.0f, 32.0f));
@@ -23,6 +23,10 @@ vector<Square> &Demineur::getSquares() {
 
 void Demineur::setSquareColor(Square &square,const Color &color) {
 	square.setFillColor(color);
+}
+
+bool &Demineur::getGameStart() {
+	return this->_isGameStart;
 }
 
 vector<Vector2f> Demineur::getSquaresPosition() {
@@ -55,5 +59,9 @@ const int &Demineur::getBombs() const {
 
 void Demineur::setBombs(int bombs) {
 	this->_bombs = bombs;
+}
+
+void Demineur::setGameStart(bool start) {
+	this->_isGameStart = start;
 }
 

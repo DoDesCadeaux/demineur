@@ -22,21 +22,24 @@ int main() {
 					Vector2i mouseLocalPosition = Mouse::getPosition(window);
 
 					for (auto &square : demineur.getSquares()) {
-						if (demineur.getBombs() == 0) {
-							for (auto &squareToSet : demineur.getSquares())
-								squareToSet.setRandSquareType();
+						if (demineur.getGameStart()) {
+							square.setRandSquareType(true);
 						}
+						else
+							square.setRandSquareType(false);
 						if (square.getGlobalBounds().contains(mouseLocalPosition.x, mouseLocalPosition.y) && !square.isDiscovered()) {
 							square.setDiscovered();
 							if (square.getSquareType() == -1)
 								demineur.setSquareColor(square, Color::Red);
 							else
 								demineur.setSquareColor(square, Color::Green);
+							demineur.setGameStart(false);
 						}
 					}
 				}
 			}
 		}
+
 		for (const RectangleShape &square : demineur.getSquares())
 			window.draw(square);
 

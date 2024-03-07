@@ -18,7 +18,7 @@ class Square : public RectangleShape {
 		Square(const Vector2f &size);
 		~Square();
 
-		void setRandSquareType();
+		void setRandSquareType(bool isGameStart);
 		void setDiscovered();
 		const int &getSquareType() const;
 		const bool &isDiscovered() const;
