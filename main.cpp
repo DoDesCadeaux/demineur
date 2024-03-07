@@ -26,8 +26,8 @@ int main() {
 							for (auto &squareToSet : demineur.getSquares())
 								squareToSet.setRandSquareType();
 						}
-						if (square.getGlobalBounds().contains(mouseLocalPosition.x, mouseLocalPosition.y)) {
-							cout << square.getSquareType() << endl;
+						if (square.getGlobalBounds().contains(mouseLocalPosition.x, mouseLocalPosition.y) && !square.isDiscovered()) {
+							square.setDiscovered();
 							if (square.getSquareType() == -1)
 								demineur.setSquareColor(square, Color::Red);
 							else

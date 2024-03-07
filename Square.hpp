@@ -12,13 +12,16 @@ using namespace std;
 class Square : public RectangleShape {
 	private:
 		int _squareType;
+		bool _isDiscovered;
 
 	public:
 		Square(const Vector2f &size);
 		~Square();
 
 		void setRandSquareType();
+		void setDiscovered();
 		const int &getSquareType() const;
+		const bool &isDiscovered() const;
 };
 
 #endif
