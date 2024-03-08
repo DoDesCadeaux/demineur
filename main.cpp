@@ -12,8 +12,8 @@ int main() {
 	while (window.isOpen()) { //Main Loop
 		Event event;
 
+
 		if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Escape)) {
-			system("leaks demineur");
 			cout << "Fermeture" << endl;
 			window.close();
 		}
@@ -28,9 +28,9 @@ int main() {
 
 					for (auto &square : demineur.getSquares()) {
 						if (demineur.getGameStart()) 
-							square.setRandSquareType(true);
+							square.setRandSquareType(true, demineur.getBombs());
 						else
-							square.setRandSquareType(false);
+							square.setRandSquareType(false, demineur.getBombs());
 						if (square.getGlobalBounds().contains(mouseLocalPosition.x, mouseLocalPosition.y) && !square.isDiscovered()) {
 							square.setDiscovered();
 							if (square.getSquareType() == -1)
@@ -49,6 +49,7 @@ int main() {
 
 		window.display();
 	}
+	return 0;
 	return 0;
 }
 

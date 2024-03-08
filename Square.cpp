@@ -7,12 +7,14 @@ Square::Square(const Vector2f &size) : RectangleShape(size) {
 
 Square::~Square() {}
 
-void Square::setRandSquareType(bool isGameStart) {
+void Square::setRandSquareType(bool isGameStart, int &bombCount) {
 	if (isGameStart == true) 
 		this->_squareType = 0;
-	else {
-		int bomb = rand() % 3 + 1;
+	else if (!isGameStart && bombCount < 10){
+		int bomb = rand() % 10 + 1;
 		this->_squareType = (bomb > 1) ? 0 : -1;
+		if (bomb == 1)
+			bombCount++;
 	}
 }
 

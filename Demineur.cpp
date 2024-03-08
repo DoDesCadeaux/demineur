@@ -57,7 +57,9 @@ void Demineur::printSquaresPositions(const vector<Vector2f> &squaresPositions) {
 	}
 }
 
-const int &Demineur::getBombs() const {
+
+
+int &Demineur::getBombs() {
 	return this->_bombs;
 }
 
