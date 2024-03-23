@@ -59,17 +59,17 @@ void Demineur::setGameStart(bool start) {
 }
 
 vector<Square> *Demineur::getNeighborsByPosition(const Vector2f &position) {
-    vector<Square> *neighbors = new vector<Square>();
+	vector<Square> *neighbors = new vector<Square>();
 
-    for (auto& square : _squares) {
-        Vector2f squarePosition = square.getPosition();
+	for (auto& square : _squares) {
+		Vector2f squarePosition = square.getPosition();
 
-        if (abs(squarePosition.x - position.x) <= 64.0f && abs(squarePosition.y - position.y) <= 64.0f)
-            if (squarePosition != position) 
-                neighbors->push_back(square);
-        
-    }
+		if (abs(squarePosition.x - position.x) <= 64.0f && abs(squarePosition.y - position.y) <= 64.0f)
+			if (squarePosition != position) 
+				neighbors->push_back(square);
 
-    return neighbors;
+	}
+
+	return neighbors;
 }
 

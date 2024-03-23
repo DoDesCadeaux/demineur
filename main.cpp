@@ -5,8 +5,6 @@ int main() {
 	Demineur demineur;
 	srand (time(NULL));
 
-	//	demineur.printSquaresPositions(demineur.getSquaresPosition());
-
 	Texture mineT, flagT, discoveredT, squareT;
 	if (!mineT.loadFromFile("lostMine.png") || !flagT.loadFromFile("flag.png") 
 			|| !discoveredT.loadFromFile("discovered.png") || !squareT.loadFromFile("square.png"))
@@ -18,9 +16,12 @@ int main() {
 	for (auto &square : demineur.getSquares())
 		square.setTexture(&squareT);
 
+	Texture oneT, twoT, threeT, fourT, unknownT;
+	if (!oneT.loadFromFile("one.png") || !twoT.loadFromFile("two.png") || !threeT.loadFromFile("three.png") || !fourT.loadFromFile("four.png") || !unknownT.loadFromFile("unknown.png"))
+		exit(1);
+
 	while (window.isOpen()) { //Main Loop
 		Event event;
-
 
 		window.clear(Color::Black);
 
@@ -44,11 +45,6 @@ int main() {
 						if (square.getGlobalBounds().contains(leftMousePos.x, leftMousePos.y) && !square.isDiscovered()) {
 							square.setDiscovered();
 
-							if (square.getSquareType() == -1)
-								square.setTexture(&mineT);
-							else
-								square.setTexture(&discoveredT);
-
 							demineur.setGameStart(false);
 							vector<Square> *neighbors = demineur.getNeighborsByPosition(square.getPosition());
 							size_t bombCount = 0;
@@ -56,17 +52,32 @@ int main() {
 								if (neighbor.getSquareType() == -1) 
 									bombCount++;
 							}
+
 							delete neighbors;
-							if (bombCount == 1)
-								square.setFillColor(Color::Red);
-							else if (bombCount == 2)
-								square.setFillColor(Color::Blue);
-							else if (bombCount == 3)
-								square.setFillColor(Color::Green);
-							else if (bombCount == 4)
-								square.setFillColor(Color::Black);
-							else if (bombCount == 5)
-								square.setFillColor(Color::Yellow);
+
+							if (square.getSquareType() == -1)
+								square.setTexture(&mineT);
+							else if (bombCount == 0)
+								square.setTexture(&discoveredT);
+							else {
+								switch (bombCount) {
+									case  1:
+										square.setTexture(&oneT);
+										break;
+									case 2:
+										square.setTexture(&twoT);
+										break;
+									case 3:
+										square.setTexture(&threeT);
+										break;
+									case 4:
+										square.setTexture(&fourT);
+										break;
+									default:
+										square.setTexture(&unknownT);
+										break;
+								}
+							}
 						}
 					}
 				}

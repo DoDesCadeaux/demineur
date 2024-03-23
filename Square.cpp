@@ -30,4 +30,3 @@ const bool &Square::isDiscovered() const {
 	return this->_isDiscovered;
 }
 
-
