@@ -23,6 +23,7 @@ class Demineur {
 
 		vector<Square> &getSquares();
 		vector<Vector2f> getSquaresPosition();
+		vector<Square> *getNeighborsByPosition(const Vector2f &position);
 		bool &getGameStart(); 
 		int &getBombs();
 		void setSquareColor(Square &square, const Color &color);
