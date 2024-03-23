@@ -88,9 +88,13 @@ int main() {
 				else if (event.mouseButton.button == Mouse::Right) {
 					Vector2i rightMousePos = Mouse::getPosition(window);
 					for (auto &square : demineur.getSquares()) {
-						if (square.getGlobalBounds().contains(rightMousePos.x, rightMousePos.y) && !square.isDiscovered()) {
+						if (square.getGlobalBounds().contains(rightMousePos.x, rightMousePos.y) && !square.isDiscovered() && !square.isFlagged()) {
 							square.setSquareFlagged(true);
 							square.setTexture(&flagT);
+						}
+						else if (square.getGlobalBounds().contains(rightMousePos.x, rightMousePos.y) && !square.isDiscovered() && square.isFlagged()) {
+							square.setSquareFlagged(false);
+							square.setTexture(&squareT);
 						}
 					}
 				}
