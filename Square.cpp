@@ -3,6 +3,7 @@
 Square::Square(const Vector2f &size) : RectangleShape(size) {
 	this->_isDiscovered = false;
 	this->_squareType = 0;
+	this->_isFlagged = false;
 }
 
 Square::~Square() {}
@@ -28,5 +29,13 @@ void Square::setDiscovered() {
 
 const bool &Square::isDiscovered() const {
 	return this->_isDiscovered;
+}
+
+void Square::setSquareFlagged(bool flag) {
+	this ->_isFlagged = flag;
+}
+
+const bool &Square::isFlagged() const {
+	return this->_isFlagged;
 }
 

@@ -13,6 +13,7 @@ class Square : public RectangleShape {
 	private:
 		int _squareType;
 		bool _isDiscovered;
+		bool _isFlagged;
 
 	public:
 		Square(const Vector2f &size);
@@ -22,6 +23,8 @@ class Square : public RectangleShape {
 		void setDiscovered();
 		const int &getSquareType() const;
 		const bool &isDiscovered() const;
+		void setSquareFlagged(bool flag);
+		const bool &isFlagged() const;
 };
 
 #endif
