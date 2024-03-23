@@ -1,22 +1,28 @@
 #include "Demineur.hpp"
 
 int main() {
-	RenderWindow window(VideoMode(320, 320), "Demineur");
+	RenderWindow window(VideoMode(640, 640), "Demineur");
 	Demineur demineur;
 	srand (time(NULL));
 
-	Texture mine;
-	if (!mine.loadFromFile("mine.png"))
+//	demineur.printSquaresPositions(demineur.getSquaresPosition());
+
+	Texture mineT, flagT, discoveredT, squareT;
+	if (!mineT.loadFromFile("lostMine.png") || !flagT.loadFromFile("flag.png") 
+			|| !discoveredT.loadFromFile("discovered.png") || !squareT.loadFromFile("square.png"))
 		return -1;
+
+	for (auto &square : demineur.getSquares())
+		square.setTexture(&squareT);
 
 	while (window.isOpen()) { //Main Loop
 		Event event;
-
 
 		if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Escape)) {
 			cout << "Fermeture" << endl;
 			window.close();
 		}
+
 		window.clear(Color::Black);
 
 		while (window.pollEvent(event)) {
@@ -24,19 +30,19 @@ int main() {
 				window.close();
 			else if (event.type == Event::MouseButtonPressed) {
 				if (event.mouseButton.button == Mouse::Left) {
-					Vector2i mouseLocalPosition = Mouse::getPosition(window);
+					Vector2i leftMousePos = Mouse::getPosition(window);
 
 					for (auto &square : demineur.getSquares()) {
 						if (demineur.getGameStart()) 
 							square.setRandSquareType(true, demineur.getBombs());
 						else
 							square.setRandSquareType(false, demineur.getBombs());
-						if (square.getGlobalBounds().contains(mouseLocalPosition.x, mouseLocalPosition.y) && !square.isDiscovered()) {
+						if (square.getGlobalBounds().contains(leftMousePos.x, leftMousePos.y) && !square.isDiscovered()) {
 							square.setDiscovered();
 							if (square.getSquareType() == -1)
-								demineur.setSquareTexture(square, &mine);
+								demineur.setSquareTexture(square, &mineT);
 							else
-								demineur.setSquareColor(square, Color::Green);
+								demineur.setSquareTexture(square, &discoveredT);
 							demineur.setGameStart(false);
 						}
 					}
@@ -44,12 +50,11 @@ int main() {
 			}
 		}
 
-		for (const RectangleShape &square : demineur.getSquares())
+		for (auto &square : demineur.getSquares())
 			window.draw(square);
 
 		window.display();
 	}
-	return 0;
 	return 0;
 }
 

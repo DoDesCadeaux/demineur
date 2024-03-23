@@ -3,13 +3,9 @@
 Demineur::Demineur() : _bombs(0), _isGameStart(true) {
 	for (size_t i = 0; i < 10; i++) {
 		for (size_t j = 0; j < 10; j++) {
-			Square square(Vector2f(32.0f, 32.0f));
+			Square square(Vector2f(64.0f, 64.0f));
 
-			square.setFillColor(Color(117, 114, 114));
-			square.setOutlineThickness(1.0f);
-			square.setOutlineColor(Color::Red);
-
-			square.setPosition(j * 32, i * 32);
+			square.setPosition(j * 64, i * 64);
 			this->_squares.push_back(square);
 		}
 	}
@@ -39,9 +35,9 @@ vector<Vector2f> Demineur::getSquaresPosition() {
 
 	for (size_t i = 0; i < 10; i++) {
 		for (size_t j = 0; j < 10; j++) {
-			RectangleShape square(Vector2f(32, 32));
+			RectangleShape square(Vector2f(64, 64));
 
-			square.setPosition(j * 32, i * 32);
+			square.setPosition(j * 64, i * 64);
 			squarePositions.push_back(square.getPosition());
 		}
 	}
@@ -52,12 +48,10 @@ vector<Vector2f> Demineur::getSquaresPosition() {
 void Demineur::printSquaresPositions(const vector<Vector2f> &squaresPositions) {
 	int i = 0;
 	for (auto it = squaresPositions.begin(); it != squaresPositions.end(); ++it) {
-		cout << "Square: " << i << " X: " << it->x << " Y: " << it->y << endl;
+		cout << "Square " << i << ": X: " << it->x << ", Y: " << it->y << endl;
 		i++;
 	}
 }
-
-
 
 int &Demineur::getBombs() {
 	return this->_bombs;
